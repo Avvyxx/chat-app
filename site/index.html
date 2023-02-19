@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/index.css">
+        <title>Chat app</title>
+    </head>
+    <body>
+        <header>
+            <h1>CHAT APP</h1>
+            <div id="connection-status" class="connection-status"></div>
+        </header>
+        <div>
+            <div>
+                <fieldset>
+                    <legend>WebSocket Connection:</legend>
+                    <button id="initiate">Initiate</button>
+                    <button id="terminate" disabled="">Terminate</button>
+                    <button id="clear-log">Clear Log</button>
+                </fieldset>
+                <fieldset>
+                    <legend>Message:</legend>
+                    <label for="message">
+                        <input type="text" id="message" name="message" disabled=""/>
+                    </label>
+                </fieldset>
+            </div>
+            <div id="message-log"></div>
+        </div>
+    </body>
+    <script src="js/index.js" type="module"></script>
+</html>
