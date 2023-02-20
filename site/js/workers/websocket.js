@@ -22,12 +22,12 @@ onmessage = (e) => {
 			};
 
 			webSocket.onmessage = (e) => {
-				console.log('message received')
+				console.log('message received');
 				postMessage({
 					objective: 'update message log',
-					content: e.data
-				})
-			}
+					content: e.data,
+				});
+			};
 			break;
 		case 'terminate websocket':
 			if (webSocket instanceof WebSocket) {
@@ -36,11 +36,21 @@ onmessage = (e) => {
 				throw new Error("WebSocket hasn't been initiated.");
 			}
 			break;
-		case 'clear message log':
-			webSocket.send('clear message log')
+		case 'run command':
+			webSocket.send(
+				JSON.stringify({
+					objective: 'run command',
+					content: e.data.content,
+				})
+			);
 			break;
-		case 'send message':
-			webSocket.send(e.data.content)
+		case 'log message':
+			webSocket.send(
+				JSON.stringify({
+					objective: 'log message',
+					content: e.data.content,
+				})
+			);
 			break;
 	}
 };
