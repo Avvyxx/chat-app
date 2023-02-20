@@ -12,15 +12,20 @@ module.exports = (message) => {
 	if (fileExists) {
 		const curData = fs.readFileSync(logPath, { encoding: 'utf-8' });
 		const parsedData = JSON.parse(curData);
-		data = [...parsedData, {
-			id: parsedData.length,
-			message
-		}];
+		data = [
+			...parsedData,
+			{
+				id: parsedData.length,
+				message,
+			},
+		];
 	} else {
-		data = [{
-			id: 0,
-			message
-		}];
+		data = [
+			{
+				id: 0,
+				message,
+			},
+		];
 	}
 
 	fs.writeFileSync(logPath, JSON.stringify(data), { encoding: 'utf8' });

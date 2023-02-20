@@ -3,7 +3,7 @@ const webSocketWorker = new Worker('js/workers/websocket.js');
 const messageInput = document.getElementById('message');
 const initiateButton = document.getElementById('initiate');
 const terminateButton = document.getElementById('terminate');
-const clearLogButton = document.getElementById('clear-log')
+const clearLogButton = document.getElementById('clear-log');
 const connectionStatusDot = document.getElementById('connection-status');
 const messageLog = document.getElementById('message-log');
 
@@ -23,16 +23,16 @@ webSocketWorker.onmessage = (e) => {
 			}
 			break;
 		case 'update message log':
-			messageLog.innerHTML = ''
+			messageLog.innerHTML = '';
 			const messageArr = JSON.parse(e.data.content);
-			messageArr.forEach(({message}) => {
-				const paragraphElement = document.createElement('p')
-				const textNode = document.createTextNode(message)
+			messageArr.forEach(({ message }) => {
+				const paragraphElement = document.createElement('p');
+				const textNode = document.createTextNode(message);
 
-				paragraphElement.appendChild(textNode)
+				paragraphElement.appendChild(textNode);
 
-				messageLog.appendChild(paragraphElement)
-			})
+				messageLog.appendChild(paragraphElement);
+			});
 			break;
 	}
 };
@@ -70,6 +70,6 @@ terminateButton.onclick = () => {
 clearLogButton.onclick = () => {
 	webSocketWorker.postMessage({
 		objective: 'run command',
-		content: 'clear message log'
-	})
-}
+		content: 'clear message log',
+	});
+};

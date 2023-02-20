@@ -1,4 +1,4 @@
-*{
+* {
     font-family: monospace;
 }
 
@@ -9,7 +9,7 @@ header {
     gap: 15px;
 }
 
-.connection-status{
+.connection-status {
     width: 20px;
     height: 20px;
     border-radius: 50%;
