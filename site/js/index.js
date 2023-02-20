@@ -47,7 +47,7 @@ messageInput.oninput = (e) => {
 messageInput.onkeydown = (e) => {
 	if (e.key.toLowerCase() === 'enter') {
 		webSocketWorker.postMessage({
-			objective: 'send message',
+			objective: 'log message',
 			content: messageInput.value,
 		});
 		curMessage = '';
@@ -69,6 +69,7 @@ terminateButton.onclick = () => {
 
 clearLogButton.onclick = () => {
 	webSocketWorker.postMessage({
-		objective: 'clear message log'
+		objective: 'run command',
+		content: 'clear message log'
 	})
 }
