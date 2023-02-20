@@ -1,4 +1,4 @@
-const { logMessage, clearLog } = require('../../util/commands');
+const { logMessage, clearLog } = require('../../commands');
 
 module.exports = (message) => {
 	const { objective, content } = JSON.parse(message);

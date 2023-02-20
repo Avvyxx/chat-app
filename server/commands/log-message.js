@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 
-const mainDir = require('../main-dir');
+const mainDir = require('../util/main-dir');
 
 module.exports = (message) => {
 	const fileExists = fs.readdirSync(`${mainDir}\\server`).includes('message-log.json');
