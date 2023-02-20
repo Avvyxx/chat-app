@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const fromDataFrame = require('./from-data-frame');
 const toDataFrame = require('./to-data-frame');
 const interpretMessage = require('./interpret-message');
-const { logMessage, mainDir, clearLog } = require('../../util');
+const { mainDir } = require('../../util');
 
 module.exports = (socket, sockets) => {
 	const { opcode, MASK, maskingKey, encodedPayload } = fromDataFrame(socket);
