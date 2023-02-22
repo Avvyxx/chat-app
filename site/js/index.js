@@ -31,7 +31,7 @@ webSocketWorker.onmessage = (e) => {
 
 				paragraphElement.appendChild(textNode);
 
-				messageLog.appendChild(paragraphElement);
+				messageLog.insertBefore(paragraphElement, messageLog.firstChild);
 			});
 			break;
 	}
