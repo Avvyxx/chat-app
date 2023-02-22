@@ -10,16 +10,16 @@
             <h1>CHAT APP</h1>
             <div id="connection-status" class="connection-status"></div>
         </header>
-        <div>
+        <main class="main">
             <div>
                 <fieldset>
                     <legend>WebSocket Connection:</legend>
-                    <button id="initiate">Initiate</button>
-                    <button id="terminate" disabled="">Terminate</button>
+                    <button id="initiate" type="button">Initiate</button>
+                    <button id="terminate" type="button"  disabled="">Terminate</button>
                 </fieldset>
                 <fieldset>
                     <legend>Commands:</legend>
-                    <button id="clear-log">Clear Log</button>
+                    <button id="clear-log" type="button">Clear Log</button>
                 </fieldset>
                 <fieldset>
                     <legend>Message:</legend>
@@ -28,8 +28,10 @@
                     </label>
                 </fieldset>
             </div>
-            <div id="message-log"></div>
-        </div>
+            <div class="message-log-viewbox">
+                 <div id="message-log"></div>
+            </div>
+        </main>
     </body>
     <script src="js/index.js" type="module"></script>
 </html>

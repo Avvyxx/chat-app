@@ -1,5 +1,19 @@
 * {
     font-family: monospace;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -18,4 +32,24 @@ header {
 
 button[disabled=''] {
     cursor: not-allowed;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-log-viewbox {
+    flex-grow: 1;
+    position: relative;
+}
+
+#message-log {
+    position: absolute;
+    inset: 0;
+    max-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
