@@ -13,7 +13,7 @@ module.exports = (req, socket) => {
 	openingHandshake(req, socket);
 	sockets.push(socket);
 
-	const curLog = fs.readFileSync(`${mainDir}\\server\\message-log.json`, { encoding: 'utf-8' });
+	const curLog = fs.readFileSync(`${mainDir}/server/message-log.json`, { encoding: 'utf-8' });
 	const curLogFrame = toDataFrame('1', '0', '0', '0', '1', '0', curLog);
 	socket.write(curLogFrame);
 

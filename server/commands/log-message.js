@@ -3,9 +3,9 @@ const fs = require('node:fs');
 const mainDir = require('../util/main-dir');
 
 module.exports = (message) => {
-	const fileExists = fs.readdirSync(`${mainDir}\\server`).includes('message-log.json');
+	const fileExists = fs.readdirSync(`${mainDir}/server`).includes('message-log.json');
 
-	const logPath = `${mainDir}\\server\\message-log.json`;
+	const logPath = `${mainDir}/server/message-log.json`;
 
 	let data;
 

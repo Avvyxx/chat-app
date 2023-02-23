@@ -19,7 +19,7 @@ module.exports = (socket, sockets) => {
 
 		interpretMessage(message);
 
-		const updatedLog = fs.readFileSync(`${mainDir}\\server\\message-log.json`, { encoding: 'utf-8' });
+		const updatedLog = fs.readFileSync(`${mainDir}/server/message-log.json`, { encoding: 'utf-8' });
 		const updatedLogFrame = toDataFrame('1', '0', '0', '0', '1', '0', updatedLog);
 		sockets.forEach((a) => a.write(updatedLogFrame));
 	} else if (opcode === 8) {
