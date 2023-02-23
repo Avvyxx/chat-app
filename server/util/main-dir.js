@@ -2,4 +2,6 @@ const os = require('node:os');
 
 const system = os.platform();
 
-module.exports = system === 'win32' ? __dirname.split('\\').slice(0, -2).join('\\') : system === 'linux' ? __dirname.split('/').slice(0, -2).join('/') : null;
+const whichSlash = system === 'win32' ? '\\' : system === 'linux' ? '/' : null
+
+module.exports = __dirname.split(whichSlash).slice(0, -2).join(whichSlash)
