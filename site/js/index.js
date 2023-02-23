@@ -33,6 +33,7 @@ webSocketWorker.onmessage = (e) => {
 
 				messageLog.appendChild(paragraphElement);
 			});
+			messageLog.scrollTo(0, messageLog.scrollHeight);
 			break;
 	}
 };
