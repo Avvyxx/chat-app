@@ -6,8 +6,6 @@ const { mainDir, mimeDict } = require('../../util');
 module.exports = (req, res) => {
 	const requestedFile =  `${mainDir}/site${req.url === '/' ? '/index.html' : req.url}`
 
-	console.log(requestedFile)
-
 	if (fs.existsSync(requestedFile)) {
 		const fileContent = fs.readFileSync(requestedFile, { encoding: 'utf-8' });
 		const headers = {
