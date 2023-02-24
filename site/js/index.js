@@ -1,6 +1,6 @@
 const webSocketWorker = new Worker('js/workers/websocket.js');
 
-const messageInput = document.getElementById('message');
+const textMessageInput = document.getElementById('text-message');
 const initiateButton = document.getElementById('initiate');
 const terminateButton = document.getElementById('terminate');
 const clearLogButton = document.getElementById('clear-log');
@@ -13,12 +13,12 @@ webSocketWorker.onmessage = (e) => {
 			if (e.data.content) {
 				initiateButton.disabled = true;
 				terminateButton.removeAttribute('disabled');
-				messageInput.removeAttribute('disabled');
+				textMessageInput.removeAttribute('disabled');
 				connectionStatusDot.style.backgroundColor = 'green';
 			} else {
 				initiateButton.removeAttribute('disabled');
 				terminateButton.disabled = true;
-				messageInput.disabled = true;
+				textMessageInput.disabled = true;
 				connectionStatusDot.style.backgroundColor = 'red';
 			}
 			break;
@@ -40,19 +40,19 @@ webSocketWorker.onmessage = (e) => {
 
 let curMessage = '';
 
-messageInput.oninput = (e) => {
+textMessageInput.oninput = (e) => {
 	curMessage = e.target.value;
-	messageInput.value = curMessage;
+	textMessageInput.value = curMessage;
 };
 
-messageInput.onkeydown = (e) => {
+textMessageInput.onkeydown = (e) => {
 	if (e.key.toLowerCase() === 'enter') {
 		webSocketWorker.postMessage({
 			objective: 'log message',
-			content: messageInput.value,
+			content: textMessageInput.value,
 		});
 		curMessage = '';
-		messageInput.value = '';
+		textMessageInput.value = '';
 	}
 };
 
