@@ -1,4 +1,5 @@
-const { toByte, toDecimal } = require('../../util');
+const toByte = require('./to-byte');
+const toDecimal = require('./to-decimal');
 
 module.exports = (dataFrame) => {
 	// reading first 2 bytes

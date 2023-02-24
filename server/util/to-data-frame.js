@@ -1,6 +1,6 @@
 const { Buffer } = require('node:buffer');
 
-const { toDecimal } = require('../../util');
+const toDecimal = require('./to-decimal');
 
 module.exports = (FIN = '1', RSV1 = '0', RSV2 = '0', RSV3 = '0', opcode = '1', MASK = '0', message) => {
 	const metaData = FIN + RSV1 + RSV2 + RSV3 + opcode.padStart(4, '0');
