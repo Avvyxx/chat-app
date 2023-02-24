@@ -2,7 +2,7 @@ const fs = require('node:fs');
 
 const mainDir = require('../util/main-dir');
 
-module.exports = (queue) => {
+module.exports = (dataTypeIndicator, content) => {
 	const logPath = `${mainDir}/server/message-log.json`;
 
 	const fileExists = fs.readdirSync(`${mainDir}/server`).includes('message-log.json');
@@ -17,8 +17,8 @@ module.exports = (queue) => {
 		...parsedData,
 		{
 			id: parsedData.length,
-			type: JSON.parse(queue[0]).type,
-			message: queue[1],
+			type: dataTypeIndicator === 1 ? 'text' : dataTypeIndicator === 2 ? 'file' : null,
+			message: content,
 		},
 	];
 
