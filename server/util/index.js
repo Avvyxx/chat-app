@@ -10,4 +10,5 @@ module.exports = {
 	createAcceptKey: require('./create-accept-key'),
 	creteResponseHeaders: require('./create-response-headers'),
 	openingHandshake: require('./opening-handshake'),
+	decodePayload: require('./decode-payload'),
 };
