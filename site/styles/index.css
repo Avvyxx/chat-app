@@ -34,6 +34,10 @@ header {
     cursor: not-allowed;
 }
 
+label {
+    display: block;
+}
+
 .main {
     flex-grow: 1;
     padding: 10px;
