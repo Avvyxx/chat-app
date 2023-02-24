@@ -1,8 +1,8 @@
-const { readBuffer, toByte, toDecimal } = require('../../util');
+const { toByte, toDecimal } = require('../../util');
 
-module.exports = (dataFrameProvider) => {
+module.exports = (dataFrame) => {
 	// reading first 2 bytes
-	const [metaData, payloadInfo] = readBuffer(dataFrameProvider.read(2)).map(toByte);
+	const [metaData, payloadInfo] = dataFrame.splice(0, 2).map(toByte);
 
 	// first byte
 	// TODO: is this repeated function call necessary
@@ -18,12 +18,12 @@ module.exports = (dataFrameProvider) => {
 
 	// conditional reading of payload length
 	// TODO: condense this conditional statement
-	const payloadLength = lengthInfo <= 125 ? lengthInfo : toDecimal(readBuffer(dataFrameProvider.read(lengthInfo === 126 ? 2 : 8).map(toByte)).join(''));
+	const payloadLength = lengthInfo <= 125 ? lengthInfo : toDecimal(dataFrame.splice(0, lengthInfo === 126 ? 2 : 8).map(toByte).join(''));
 
 	// payload information
 	// TODO: this null may cause issues later
-	const maskingKey = Boolean(MASK) ? readBuffer(dataFrameProvider.read(4)) : null;
-	const encodedPayload = readBuffer(dataFrameProvider.read());
+	const maskingKey = Boolean(MASK) ? dataFrame.splice(0, 4) : null;
+	const encodedPayload = dataFrame;
 
 	// returning all relevant values
 	return {
