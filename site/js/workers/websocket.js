@@ -45,12 +45,6 @@ onmessage = (e) => {
 			);
 			break;
 		case 'log message':
-			webSocket.send(
-				JSON.stringify({
-					objective: e.data.objective,
-					type: e.data.type,
-				})
-			);
 			webSocket.send(e.data.content);
 			break;
 	}
