@@ -6,7 +6,7 @@ const interpretMessage = require('./interpret-message');
 const { mainDir } = require('../../util');
 
 module.exports = (socket, sockets) => {
-	const data = JSON.parse(JSON.stringify(socket.read()) || {}).data
+	const data = JSON.parse(JSON.stringify(socket.read()) || {}).data;
 	if (data !== null) {
 		const { opcode, MASK, maskingKey, encodedPayload } = fromDataFrame(data);
 
