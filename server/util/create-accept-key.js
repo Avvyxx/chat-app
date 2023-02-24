@@ -1,6 +1,6 @@
 const crypto = require('node:crypto');
 
-const { magicWebSocketKey } = require('../../util');
+const magicWebSocketKey = require('./magic-websocket-key');
 
 module.exports = (reqKey) => {
 	const responseWebSocketKeyHash = crypto.createHash('sha1');
