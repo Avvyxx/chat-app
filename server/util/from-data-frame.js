@@ -3,7 +3,8 @@ const toDecimal = require('./to-decimal');
 
 module.exports = (dataFrame) => {
 	// reading first 2 bytes
-	const [metaData, payloadInfo] = dataFrame.splice(0, 2).map(toByte);
+	const dataFrameCopy = [...dataFrame]
+	const [metaData, payloadInfo] = dataFrameCopy.splice(0, 2).map(toByte);
 
 	// first byte
 	// TODO: is this repeated function call necessary
@@ -23,7 +24,7 @@ module.exports = (dataFrame) => {
 		lengthInfo <= 125
 			? lengthInfo
 			: toDecimal(
-					dataFrame
+					dataFrameCopy
 						.splice(0, lengthInfo === 126 ? 2 : 8)
 						.map(toByte)
 						.join('')
@@ -31,8 +32,8 @@ module.exports = (dataFrame) => {
 
 	// payload information
 	// TODO: this null may cause issues later
-	const maskingKey = Boolean(MASK) ? dataFrame.splice(0, 4) : null;
-	const encodedPayload = dataFrame;
+	const maskingKey = Boolean(MASK) ? dataFrameCopy.splice(0, 4) : null;
+	const encodedPayload = dataFrameCopy;
 
 	// returning all relevant values
 	return {
