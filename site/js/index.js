@@ -20,6 +20,7 @@ webSocketWorker.onmessage = (e) => {
 				terminateButton.disabled = true;
 				textMessageInput.disabled = true;
 				connectionStatusDot.style.backgroundColor = 'red';
+				messageLog.innerHTML = '';
 			}
 			break;
 		case 'update message log':
