@@ -8,7 +8,6 @@ module.exports = (socket, sockets) => {
 		if (checkIfBufferNull) {
 			const { data } = checkIfBufferNull.toJSON();
 
-			// TODO: this function directly edits data variable
 			const { opcode, MASK, maskingKey, encodedPayload } = fromDataFrame(data);
 
 			const message = decodePayload(Boolean(MASK), maskingKey, encodedPayload);
