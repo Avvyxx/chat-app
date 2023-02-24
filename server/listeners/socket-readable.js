@@ -1,5 +1,5 @@
-const logMessage = require('../../commands/log-message');
-const { fromDataFrame, updateClientLogs } = require('../../util');
+const logMessage = require('../commands/log-message');
+const { fromDataFrame, updateClientLogs } = require('../util');
 
 module.exports = (socket, sockets) => {
 	const data = JSON.parse(JSON.stringify(socket.read()) || {}).data;

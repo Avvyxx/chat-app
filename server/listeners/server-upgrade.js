@@ -1,5 +1,5 @@
-const socketReadable = require('../socket-readable/socket-readable');
-const { openingHandshake, updateClientLogs } = require('../../util');
+const socketReadable = require('./socket-readable');
+const { openingHandshake, updateClientLogs } = require('../util');
 
 const sockets = [];
 

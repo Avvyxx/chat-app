@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { mainDir, mimeDict } = require('../../util');
+const { mainDir, mimeDict } = require('../util');
 
 module.exports = (req, res) => {
 	if (req.method === 'GET') {
