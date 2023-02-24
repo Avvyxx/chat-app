@@ -32,13 +32,22 @@ webSocketWorker.onmessage = (e) => {
 		case 'update message log':
 			messageLog.innerHTML = '';
 			const messageArr = JSON.parse(e.data.content);
-			messageArr.forEach(({ message }) => {
-				const paragraphElement = document.createElement('p');
-				const textNode = document.createTextNode(message);
+			messageArr.forEach(({ type, message }) => {
+				let eleToAppend;
+				if (type === 'text') {
+					eleToAppend = document.createElement('p');
+					const textNode = document.createTextNode(message);
 
-				paragraphElement.appendChild(textNode);
+					eleToAppend.appendChild(textNode);
 
-				messageLog.appendChild(paragraphElement);
+					messageLog.appendChild(eleToAppend);
+				} else if (type === 'file') {
+					eleToAppend = document.createElement('img');
+
+					eleToAppend.src = 'data:image/jpeg;base64,' + message;
+				}
+
+				messageLog.append(eleToAppend);
 			});
 			messageLog.scrollTo(0, messageLog.scrollHeight);
 			break;
@@ -56,6 +65,7 @@ textMessageInput.onkeydown = (e) => {
 	if (e.key.toLowerCase() === 'enter') {
 		webSocketWorker.postMessage({
 			objective: 'log message',
+			type: 'text',
 			content: textMessageInput.value,
 		});
 		curMessage = '';
@@ -69,8 +79,9 @@ sendFileMessageButton.onclick = () => {
 	fileToSend.onload = () => {
 		webSocketWorker.postMessage({
 			objective: 'log message',
-			content: fileToSend.result
-		})
+			type: 'file',
+			content: fileToSend.result,
+		});
 	};
 };
 
