@@ -63,6 +63,17 @@ textMessageInput.onkeydown = (e) => {
 	}
 };
 
+sendFileMessageButton.onclick = () => {
+	const fileToSend = new FileReader();
+	fileToSend.readAsArrayBuffer(fileMessageInput.files[0]);
+	fileToSend.onload = () => {
+		webSocketWorker.postMessage({
+			objective: 'log message',
+			content: fileToSend.result
+		})
+	};
+};
+
 initiateButton.onclick = () => {
 	webSocketWorker.postMessage({
 		objective: 'initiate websocket',
