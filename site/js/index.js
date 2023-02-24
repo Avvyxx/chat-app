@@ -1,6 +1,8 @@
 const webSocketWorker = new Worker('js/workers/websocket.js');
 
 const textMessageInput = document.getElementById('text-message');
+const fileMessageInput = document.getElementById('file-message');
+const sendFileMessageButton = document.getElementById('send-file-message');
 const initiateButton = document.getElementById('initiate');
 const terminateButton = document.getElementById('terminate');
 const clearLogButton = document.getElementById('clear-log');
