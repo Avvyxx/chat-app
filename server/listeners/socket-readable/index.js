@@ -1,4 +1,4 @@
-const interpretMessage = require('./interpret-message');
+const logMessage = require('../../commands/log-message');
 const { fromDataFrame, updateClientLogs } = require('../../util');
 
 module.exports = (socket, sockets) => {
@@ -16,12 +16,12 @@ module.exports = (socket, sockets) => {
 		}
 
 		if (opcode === 1) {
-			interpretMessage(message);
+			logMessage(message);
 
 			sockets.forEach(updateClientLogs);
 		} else if (opcode === 2) {
 			const base64Encoding = Buffer.from(message).toString('base64');
-			interpretMessage(base64Encoding);
+			logMessage(base64Encoding);
 
 			sockets.forEach(updateClientLogs);
 		} else if (opcode === 8) {
