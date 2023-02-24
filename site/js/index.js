@@ -13,7 +13,7 @@ webSocketWorker.onmessage = (e) => {
 			if (e.data.content) {
 				initiateButton.disabled = true;
 				terminateButton.removeAttribute('disabled');
-				messageInput.disabled = false;
+				messageInput.removeAttribute('disabled');
 				connectionStatusDot.style.backgroundColor = 'green';
 			} else {
 				initiateButton.removeAttribute('disabled');
