@@ -1,6 +1,5 @@
-const openingHandshake = require('./opening-handshake');
 const socketReadable = require('../socket-readable');
-const { updateClientLogs } = require('../../util');
+const { openingHandshake, updateClientLogs } = require('../../util');
 
 const sockets = [];
 
