@@ -11,9 +11,7 @@ module.exports = (req, socket) => {
 
 	updateClientLogs(socket);
 
-	socket.on('readable', () => {
-		socketReadable(socket, sockets);
-	});
+	socket.on('readable', socketReadable(socket, sockets));
 
 	socket.on('close', () => {
 		console.log('Connection closed.');
