@@ -2,31 +2,25 @@ const fs = require('node:fs');
 
 const mainDir = require('../util/main-dir');
 
-module.exports = (message) => {
-	const fileExists = fs.readdirSync(`${mainDir}/server`).includes('message-log.json');
-
+module.exports = (queue) => {
 	const logPath = `${mainDir}/server/message-log.json`;
 
-	let data;
+	const fileExists = fs.readdirSync(`${mainDir}/server`).includes('message-log.json');
 
+	let parsedData = [];
 	if (fileExists) {
-		const curData = fs.readFileSync(logPath, { encoding: 'utf-8' });
-		const parsedData = JSON.parse(curData);
-		data = [
-			...parsedData,
-			{
-				id: parsedData.length,
-				message,
-			},
-		];
-	} else {
-		data = [
-			{
-				id: 0,
-				message,
-			},
-		];
+		const curData = fs.readFileSync(logPath, { encoding: 'utf-8' }) || '[]';
+		parsedData = JSON.parse(curData);
 	}
+
+	const data = [
+		...parsedData,
+		{
+			id: parsedData.length,
+			type: JSON.parse(queue[0]).type,
+			message: queue[1],
+		},
+	];
 
 	fs.writeFileSync(logPath, JSON.stringify(data), { encoding: 'utf8' });
 };
