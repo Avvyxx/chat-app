@@ -16,11 +16,15 @@ webSocketWorker.onmessage = (e) => {
 				initiateButton.disabled = true;
 				terminateButton.removeAttribute('disabled');
 				textMessageInput.removeAttribute('disabled');
+				fileMessageInput.removeAttribute('disabled');
+				sendFileMessageButton.removeAttribute('disabled');
 				connectionStatusDot.style.backgroundColor = 'green';
 			} else {
 				initiateButton.removeAttribute('disabled');
 				terminateButton.disabled = true;
 				textMessageInput.disabled = true;
+				fileMessageInput.disabled = true;
+				sendFileMessageButton.disabled = true;
 				connectionStatusDot.style.backgroundColor = 'red';
 				messageLog.innerHTML = '';
 			}
