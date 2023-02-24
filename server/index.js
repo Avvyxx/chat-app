@@ -1,8 +1,8 @@
-const https = require('node:https');
+const http = require('node:http');
 
 const { serverRequest, serverUpgrade, serverError } = require('./listeners');
 
-const server = https.createServer();
+const server = http.createServer();
 
 server.listen(3000, () => {
 	console.log('Server is running.');
