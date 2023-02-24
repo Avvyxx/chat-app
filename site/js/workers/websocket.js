@@ -3,7 +3,7 @@ let webSocket;
 onmessage = (e) => {
 	switch (e.data.objective) {
 		case 'initiate websocket':
-			webSocket = new WebSocket('ws://avyx.dev');
+			webSocket = new WebSocket('wss://avyx.dev');
 
 			webSocket.onopen = () => {
 				console.log('WebSocket connection to chat server established.');
