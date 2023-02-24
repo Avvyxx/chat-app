@@ -1,7 +1,7 @@
 const socketReadable = require('./socket-readable');
 const { openingHandshake, updateClientLogs } = require('../util');
 
-const sockets = [];
+let sockets = [];
 
 module.exports = (req, socket) => {
 	console.log('Client requested upgrade.');
@@ -15,5 +15,7 @@ module.exports = (req, socket) => {
 
 	socket.on('close', () => {
 		console.log('Connection closed.');
+
+		sockets = sockets.filter((s) => s.closed === false);
 	});
 };
