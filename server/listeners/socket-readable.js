@@ -1,11 +1,14 @@
 const logMessage = require('../commands/log-message');
 const { fromDataFrame, updateClientLogs } = require('../util');
 
+let messageQueue = [];
+
 module.exports = (socket, sockets) => {
 	return () => {
 		const data = JSON.parse(JSON.stringify(socket.read()) || {}).data;
 
 		if (data !== null) {
+			// TODO: this function directly edits data variable
 			const { opcode, MASK, maskingKey, encodedPayload } = fromDataFrame(data);
 
 			let message;
@@ -16,15 +19,25 @@ module.exports = (socket, sockets) => {
 				message = encodedPayload;
 			}
 
+			messageQueue.push(message);
+
 			if (opcode === 1) {
-				logMessage(message);
+				if (messageQueue.length === 2) {
+					logMessage(messageQueue);
 
-				sockets.forEach(updateClientLogs);
+					sockets.forEach(updateClientLogs);
+
+					messageQueue = [];
+				}
 			} else if (opcode === 2) {
-				const base64Encoding = Buffer.from(message).toString('base64');
-				logMessage(base64Encoding);
+				if (messageQueue.length === 2) {
+					messageQueue[1] = Buffer.from(messageQueue[1]).toString('base64');
+					logMessage(messageQueue);
 
-				sockets.forEach(updateClientLogs);
+					sockets.forEach(updateClientLogs);
+
+					messageQueue = [];
+				}
 			} else if (opcode === 8) {
 				socket.destroy();
 			}
