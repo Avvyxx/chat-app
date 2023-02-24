@@ -30,7 +30,7 @@ header {
     background-color: red;
 }
 
-button[disabled=''] {
+*[disabled=''] {
     cursor: not-allowed;
 }
 
