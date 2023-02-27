@@ -12,17 +12,23 @@ module.exports = (socket, sockets) => {
 
 			const message = decodePayload(Boolean(MASK), maskingKey, encodedPayload);
 
-			if (opcode === 1) {
-				logMessage(opcode, message);
+			switch (opcode) {
+				case 1:
+					logMessage(opcode, message);
 
-				sockets.forEach(updateClientLogs);
-			} else if (opcode === 2) {
-				const base64Encoding = Buffer.from(message).toString('base64');
-				logMessage(opcode, base64Encoding);
+					sockets.forEach(updateClientLogs);
+					break;
+				case 2:
+					const base64Encoding = Buffer.from(message, 'binary').toString('base64');
+					logMessage(opcode, base64Encoding);
 
-				sockets.forEach(updateClientLogs);
-			} else if (opcode === 8) {
-				socket.destroy();
+					sockets.forEach(updateClientLogs);
+					break;
+				case 8:
+					socket.destroy();
+					break;
+				default:
+					break;
 			}
 		}
 	};
