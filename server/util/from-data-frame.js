@@ -1,6 +1,16 @@
 const toByte = require('./to-byte');
 const toDecimal = require('./to-decimal');
 
+const calcPayloadLength = (dataFrame, lenInd) => {
+	if (lenInd <= 125) {
+		return lenInd;
+	} else if (lenInd === 126) {
+		return toDecimal(dataFrame.splice(0, 2).map(toByte).join(''));
+	} else if (lenInd === 127) {
+		return toDecimal(dataFrame.splice(0, 8).map(toByte).join(''));
+	}
+};
+
 module.exports = (dataFrame) => {
 	// reading first 2 bytes
 	const dataFrameCopy = [...dataFrame]
