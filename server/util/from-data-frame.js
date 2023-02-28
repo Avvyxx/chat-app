@@ -12,9 +12,10 @@ const calcPayloadLength = (dataFrame, lenInd) => {
 };
 
 module.exports = (dataFrame) => {
-	// reading first 2 bytes
 	const dataFrameCopy = [...dataFrame]
-	const [metaData, payloadInfo] = dataFrameCopy.splice(0, 2).map(toByte);
+
+	// reading first 2 bytes
+	const [metaData, payloadInfo] = dataFrameCopy.splice(0, 2).map(toByte)
 
 	// first byte
 	// TODO: is this repeated function call necessary
