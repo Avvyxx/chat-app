@@ -19,14 +19,14 @@ webSocketWorker.onmessage = (e) => {
 				textMessageInput.removeAttribute('disabled');
 				fileMessageInput.removeAttribute('disabled');
 				sendFileMessageButton.removeAttribute('disabled');
-				connectionStatusDot.style.backgroundColor = 'green';
+				connectionStatusDot.style.backgroundColor = '#34cf39';
 			} else {
 				initiateButton.removeAttribute('disabled');
 				terminateButton.disabled = true;
 				textMessageInput.disabled = true;
 				fileMessageInput.disabled = true;
 				sendFileMessageButton.disabled = true;
-				connectionStatusDot.style.backgroundColor = 'red';
+				connectionStatusDot.style.backgroundColor = '#f6370e';
 				messageLog.innerHTML = '';
 				curConnectedCount.innerHTML = 'N/A'
 			}
