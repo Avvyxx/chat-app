@@ -27,7 +27,7 @@ module.exports = (dataFrame) => {
 
 	//second byte
 	const MASK = toDecimal(payloadInfo[0]);
-	const lengthInfo = toDecimal(payloadInfo.slice(1));
+	const payloadLengthInd = toDecimal(payloadInfo.slice(1));
 
 	// conditional reading of payload length
 	// TODO: condense this conditional statement
