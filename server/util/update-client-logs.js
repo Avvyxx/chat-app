@@ -5,7 +5,13 @@ const mainDir = require('./main-dir');
 
 module.exports = (socket) => {
 	const curData = fs.readFileSync(`${mainDir}/server/message-log.json`, { encoding: 'utf-8' });
-	const curDataFrame = toDataFrame('1', '0', '0', '0', '1', '0', curData);
 
-	socket.write(curDataFrame);
+	const dataToSend = JSON.stringify({
+		objective: 'update client logs',
+		content: curData,
+	});
+
+	const frame = toDataFrame('1', '0', '0', '0', '1', '0', dataToSend);
+
+	socket.write(frame);
 };
