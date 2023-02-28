@@ -3,25 +3,33 @@ const fs = require('node:fs');
 const mainDir = require('../util/main-dir');
 
 module.exports = (dataTypeIndicator, content) => {
-	const logPath = `${mainDir}/server/message-log.json`;
+	const lifetimeLogPath = `${mainDir}/server/logs/lifetime-log.json`;
+	const sessionLogPath = `${mainDir}/server/logs/session-log.json`;
 
-	const fileExists = fs.readdirSync(`${mainDir}/server`).includes('message-log.json');
+	const curLifetimeLog = fs.readFileSync(lifetimeLogPath, { encoding: 'utf-8' }) || '[]';
+	const parsedLifetimeLog = JSON.parse(curLifetimeLog);
 
-	let parsedData = [];
-	if (fileExists) {
-		const curData = fs.readFileSync(logPath, { encoding: 'utf-8' }) || '[]';
-		parsedData = JSON.parse(curData);
-	}
+	const curSessionLog = fs.readFileSync(sessionLogPath, { encoding: 'utf-8' }) || '[]';
+	const parsedSessionLog = JSON.parse(curSessionLog);
 
-	const data = [
-		...parsedData,
+	const updatedLifetimeLog = [
+		...parsedLifetimeLog,
 		{
-			id: parsedData.length,
+			id: parsedLifetimeLog.length,
 			type: dataTypeIndicator === 1 ? 'text' : dataTypeIndicator === 2 ? 'file' : null,
 			message: content,
 		},
 	];
 
-	// TODO: consistent encoding values where necessary
-	fs.writeFileSync(logPath, JSON.stringify(data), { encoding: 'utf8' });
+	const updatedSessionLog = [
+		...parsedSessionLog,
+		{
+			id: parsedSessionLog.length,
+			type: dataTypeIndicator === 1 ? 'text' : dataTypeIndicator === 2 ? 'file' : null,
+			message: content,
+		},
+	];
+
+	fs.writeFileSync(lifetimeLogPath, JSON.stringify(updatedLifetimeLog), { encoding: 'utf-8' });
+	fs.writeFileSync(sessionLogPath, JSON.stringify(updatedSessionLog), { encoding: 'utf8' });
 };
