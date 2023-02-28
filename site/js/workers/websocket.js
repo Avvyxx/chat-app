@@ -22,10 +22,10 @@ onmessage = (e) => {
 			};
 
 			webSocket.onmessage = (e) => {
-				console.log('message received');
+				const { objective, content } = JSON.parse(e.data);
 				postMessage({
-					objective: 'update message log',
-					content: e.data,
+					objective,
+					content,
 				});
 			};
 			break;
