@@ -1,5 +1,5 @@
 const { logMessage } = require('../commands');
-const { fromDataFrame, decodePayload, updateClientLogs } = require('../util');
+const { fromDataFrame, decodePayload, updateClientLogs, opcodeDict } = require('../util');
 
 // TODO: create constants for opcodes, names should indicate meaning
 
@@ -20,19 +20,20 @@ module.exports = (socket, sockets) => {
 
 				const message = decodePayload(Boolean(MASK), maskingKey, payload);
 
+				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE } = opcodeDict;
 				switch (opcode) {
-					case 1:
+					case TEXT_FRAME:
 						logMessage(opcode, message);
 
 						sockets.forEach(updateClientLogs);
 						break;
-					case 2:
+					case BINARY_FRAME:
 						const base64Encoding = Buffer.from(message, 'binary').toString('base64');
 						logMessage(opcode, base64Encoding);
 
 						sockets.forEach(updateClientLogs);
 						break;
-					case 8:
+					case CONNECTION_CLOSE:
 						socket.destroy();
 						break;
 					default:
