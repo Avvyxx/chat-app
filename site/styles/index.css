@@ -61,3 +61,7 @@ header {
 .text_message{
     word-wrap: break-word;
 }
+
+.image_message{
+    max-width: 50%;
+}
