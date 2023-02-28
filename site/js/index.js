@@ -8,6 +8,7 @@ const terminateButton = document.getElementById('terminate');
 const clearLogButton = document.getElementById('clear-log');
 const connectionStatusDot = document.getElementById('connection-status');
 const messageLog = document.getElementById('message-log');
+const curConnectedCount = document.getElementById('cur-connected-count')
 
 webSocketWorker.onmessage = (e) => {
 	switch (e.data.objective) {
@@ -27,9 +28,10 @@ webSocketWorker.onmessage = (e) => {
 				sendFileMessageButton.disabled = true;
 				connectionStatusDot.style.backgroundColor = 'red';
 				messageLog.innerHTML = '';
+				curConnectedCount.innerHTML = 'N/A'
 			}
 			break;
-		case 'update message log':
+		case 'update client logs':
 			messageLog.innerHTML = '';
 			const messageArr = JSON.parse(e.data.content);
 			messageArr.forEach(({ type, message }) => {
@@ -53,6 +55,9 @@ webSocketWorker.onmessage = (e) => {
 				messageLog.append(eleToAppend);
 			});
 			messageLog.scrollTo(0, messageLog.scrollHeight);
+			break;
+		case 'update client connected':
+			curConnectedCount.innerHTML = e.data.content.toString()
 			break;
 	}
 };

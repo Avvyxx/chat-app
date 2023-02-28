@@ -16,7 +16,13 @@ body {
     flex-direction: column;
 }
 
-header {
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -35,8 +41,8 @@ header {
 }
 
 .main {
+    margin-top: 10px;
     flex-grow: 1;
-    padding: 10px;
     display: flex;
     flex-direction: column;
 }
