@@ -1,7 +1,8 @@
 const { logMessage } = require('../commands');
-const { fromDataFrame, decodePayload, updateClientLogs, opcodeDict } = require('../util');
+const { fromDataFrame, toDataFrame, decodePayload, updateClientLogs, opcodeDict } = require('../util');
 
 // TODO: create constants for opcodes, names should indicate meaning
+// TODO: client rate limiting
 
 let temp = [];
 
@@ -20,7 +21,7 @@ module.exports = (socket, sockets) => {
 
 				const message = decodePayload(Boolean(MASK), maskingKey, payload);
 
-				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE } = opcodeDict;
+				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING } = opcodeDict;
 				switch (opcode) {
 					case TEXT_FRAME:
 						logMessage(opcode, message);
@@ -35,6 +36,10 @@ module.exports = (socket, sockets) => {
 						break;
 					case CONNECTION_CLOSE:
 						socket.destroy();
+						break;
+					case PING:
+						const pongFrame = toDataFrame('1', '0', '0', '0', '1010', '0', 'pong frame');
+						socket.write(pongFrame);
 						break;
 					default:
 						break;
