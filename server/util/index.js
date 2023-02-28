@@ -11,4 +11,5 @@ module.exports = {
 	creteResponseHeaders: require('./create-response-headers'),
 	openingHandshake: require('./opening-handshake'),
 	decodePayload: require('./decode-payload'),
+	opcodeDict: require('./opcode-dict'),
 };
