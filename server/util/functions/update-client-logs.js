@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 
 const toDataFrame = require('./to-data-frame');
-const mainDir = require('./main-dir');
+const mainDir = require('../constants/main-dir');
 
 module.exports = (socket) => {
 	const curLog = fs.readFileSync(`${mainDir}/server/logs/session-log.json`, { encoding: 'utf-8' });
