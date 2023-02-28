@@ -34,8 +34,9 @@ module.exports = (dataFrame) => {
 
 	// payload information
 	// TODO: this null may cause issues later
-	const maskingKey = Boolean(MASK) ? dataFrameCopy.splice(0, 4) : null;
-	const encodedPayload = dataFrameCopy;
+	const maskingKey = Boolean(MASK) ? dataFrameCopy.splice(0, 4) : undefined;
+
+	const payload = [...dataFrameCopy]
 
 	// returning all relevant values
 	return {
@@ -47,6 +48,6 @@ module.exports = (dataFrame) => {
 		MASK,
 		payloadLength,
 		maskingKey,
-		encodedPayload,
+		payload,
 	};
 };
