@@ -12,4 +12,5 @@ module.exports = {
 	openingHandshake: require('./opening-handshake'),
 	decodePayload: require('./decode-payload'),
 	opcodeDict: require('./opcode-dict'),
+	updateClientConnected: require('./update-client-connected'),
 };
