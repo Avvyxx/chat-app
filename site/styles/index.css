@@ -53,3 +53,11 @@ header {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+#message-log * {
+    display: block
+}
+
+.text_message{
+    word-wrap: break-word;
+}
