@@ -39,12 +39,15 @@ webSocketWorker.onmessage = (e) => {
 					const textNode = document.createTextNode(message);
 
 					eleToAppend.appendChild(textNode);
+					eleToAppend.classList.add('text_message')
 
 					messageLog.appendChild(eleToAppend);
 				} else if (type === 'file') {
 					eleToAppend = document.createElement('img');
 
-					eleToAppend.src = 'data:image/jpeg;base64,' + message;
+					eleToAppend.classList.add('image_message')
+
+					eleToAppend.src = 'data:image/png;charset=utf-8;base64,' + message;
 				}
 
 				messageLog.append(eleToAppend);
