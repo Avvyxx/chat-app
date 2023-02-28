@@ -1,7 +1,6 @@
 const { logMessage } = require('../commands');
 const { fromDataFrame, toDataFrame, decodePayload, updateClientLogs, opcodeDict } = require('../util');
 
-// TODO: create constants for opcodes, names should indicate meaning
 // TODO: client rate limiting
 
 let temp = [];
