@@ -4,11 +4,11 @@ const toDataFrame = require('./to-data-frame');
 const mainDir = require('./main-dir');
 
 module.exports = (socket) => {
-	const curData = fs.readFileSync(`${mainDir}/server/message-log.json`, { encoding: 'utf-8' });
+	const curLog = fs.readFileSync(`${mainDir}/server/logs/session-log.json`, { encoding: 'utf-8' });
 
 	const dataToSend = JSON.stringify({
 		objective: 'update client logs',
-		content: curData,
+		content: curLog,
 	});
 
 	const frame = toDataFrame('1', '0', '0', '0', '1', '0', dataToSend);
