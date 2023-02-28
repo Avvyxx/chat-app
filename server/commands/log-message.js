@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 
-const mainDir = require('../util/constants/main-dir');
+const { mainDir } = require('../util');
 
 module.exports = (dataTypeIndicator, content) => {
 	const lifetimeLogPath = `${mainDir}/server/logs/lifetime-log.json`;
