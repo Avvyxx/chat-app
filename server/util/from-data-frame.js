@@ -30,16 +30,7 @@ module.exports = (dataFrame) => {
 	const payloadLengthInd = toDecimal(payloadInfo.slice(1));
 
 	// conditional reading of payload length
-	// TODO: condense this conditional statement
-	const payloadLength =
-		lengthInfo <= 125
-			? lengthInfo
-			: toDecimal(
-					dataFrameCopy
-						.splice(0, lengthInfo === 126 ? 2 : 8)
-						.map(toByte)
-						.join('')
-			  );
+	const payloadLength = calcPayloadLength(dataFrameCopy, payloadLengthInd)
 
 	// payload information
 	// TODO: this null may cause issues later
