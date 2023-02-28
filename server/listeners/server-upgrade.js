@@ -11,6 +11,7 @@ module.exports = (req, socket) => {
 
 	updateClientLogs(socket);
 
+	// TODO: ping client to keep connection alive or respond to bing from client
 	socket.on('readable', socketReadable(socket, sockets));
 
 	socket.on('close', () => {

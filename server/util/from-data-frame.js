@@ -12,10 +12,10 @@ const calcPayloadLength = (dataFrame, lenInd) => {
 };
 
 module.exports = (dataFrame) => {
-	const dataFrameCopy = [...dataFrame]
+	const dataFrameCopy = [...dataFrame];
 
 	// reading first 2 bytes
-	const [metaData, payloadInfo] = dataFrameCopy.splice(0, 2).map(toByte)
+	const [metaData, payloadInfo] = dataFrameCopy.splice(0, 2).map(toByte);
 
 	// first byte
 	// TODO: is this repeated function call necessary
@@ -30,13 +30,13 @@ module.exports = (dataFrame) => {
 	const payloadLengthInd = toDecimal(payloadInfo.slice(1));
 
 	// conditional reading of payload length
-	const payloadLength = calcPayloadLength(dataFrameCopy, payloadLengthInd)
+	const payloadLength = calcPayloadLength(dataFrameCopy, payloadLengthInd);
 
 	// payload information
 	// TODO: this null may cause issues later
 	const maskingKey = Boolean(MASK) ? dataFrameCopy.splice(0, 4) : undefined;
 
-	const payload = [...dataFrameCopy]
+	const payload = [...dataFrameCopy];
 
 	// returning all relevant values
 	return {

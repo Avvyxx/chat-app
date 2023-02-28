@@ -22,5 +22,6 @@ module.exports = (dataTypeIndicator, content) => {
 		},
 	];
 
+	// TODO: consistent encoding values where necessary
 	fs.writeFileSync(logPath, JSON.stringify(data), { encoding: 'utf8' });
 };
