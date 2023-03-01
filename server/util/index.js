@@ -12,4 +12,5 @@ module.exports = {
 	toDataFrame: require('./functions/to-data-frame'),
 	decodePayload: require('./functions/decode-payload'),
 	updateClientConnected: require('./functions/update-client-connected'),
+	broadcast: require('./functions/broadcast'),
 };

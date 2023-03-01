@@ -3,4 +3,5 @@ module.exports = {
 	serverUpgrade: require('./server-upgrade'),
 	serverError: require('./server-error'),
 	socketReadable: require('./socket-readable'),
+	socketClose: require('./socket-close'),
 };
