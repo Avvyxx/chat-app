@@ -1,7 +1,3 @@
-const os = require('node:os');
+const path = require('node:path');
 
-const system = os.platform();
-
-const whichSlash = system === 'win32' ? '\\' : system === 'linux' ? '/' : null;
-
-module.exports = __dirname.split(whichSlash).slice(0, -3).join(whichSlash);
+module.exports = path.join(...__dirname.split(path.sep).slice(0, 4));
