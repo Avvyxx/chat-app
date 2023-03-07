@@ -16,7 +16,7 @@ body {
     flex-direction: column;
 }
 
-header{
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,7 +29,7 @@ header{
     gap: 15px;
 }
 
-.connection-status{
+.connection-status {
     width: 20px;
     height: 20px;
 }
@@ -65,11 +65,11 @@ header{
     display: block
 }
 
-.text_message{
+.text_message {
     word-wrap: break-word;
 }
 
-.image_message{
-    max-width: 50%;
+.image_message {
+    max-width: 400px;
     border: 1px solid black
 }
