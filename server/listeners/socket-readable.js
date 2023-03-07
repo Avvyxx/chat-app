@@ -1,4 +1,4 @@
-const { logMessage } = require('../commands');
+const { logMessage, interpretMessage } = require('../commands');
 const { fromDataFrame, toDataFrame, updateClientLogs, opcodeDict } = require('../util');
 
 // TODO: client rate limiting
@@ -30,13 +30,13 @@ module.exports = (socket, sockets) => {
 				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING } = opcodeDict;
 				switch (opcode) {
 					case TEXT_FRAME:
-						logMessage(opcode, message);
+						interpretMessage('text', message);
 
 						sockets.forEach(updateClientLogs);
 						break;
 					case BINARY_FRAME:
 						const base64Encoding = Buffer.from(message, 'binary').toString('base64');
-						logMessage(opcode, base64Encoding);
+						logMessage('file', base64Encoding);
 
 						sockets.forEach(updateClientLogs);
 						break;
