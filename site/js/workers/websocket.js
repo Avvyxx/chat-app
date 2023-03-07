@@ -37,12 +37,11 @@ onmessage = (e) => {
 			}
 			break;
 		case 'run command':
-			webSocket.send(
-				JSON.stringify({
-					objective: 'run command',
-					content: e.data.content,
-				})
-			);
+			switch (e.data.content) {
+				case 'clear message log':
+					webSocket.send('clear_log()');
+					break;
+			}
 			break;
 		case 'log message':
 			webSocket.send(e.data.content);
