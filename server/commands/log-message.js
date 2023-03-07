@@ -1,10 +1,11 @@
 const fs = require('node:fs');
+const path = require('node:path');
 
 const { mainDir } = require('../util');
 
 module.exports = (msgType, content) => {
-	const lifetimeLogPath = `${mainDir}/server/logs/lifetime-log.json`;
-	const sessionLogPath = `${mainDir}/server/logs/session-log.json`;
+	const lifetimeLogPath = path.join(mainDir, 'server', 'logs', 'lifetime-log.json');
+	const sessionLogPath = path.join(mainDir, 'server', 'logs', 'session-log.json');
 
 	const curLifetimeLog = fs.readFileSync(lifetimeLogPath, { encoding: 'utf-8' }) || '[]';
 	const parsedLifetimeLog = JSON.parse(curLifetimeLog);
