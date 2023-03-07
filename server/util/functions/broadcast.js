@@ -1,4 +1,4 @@
-const { toDataFrame } = require('../index');
+const toDataFrame = require('./to-data-frame')
 
 // TODO: implement this broadcast function where necessary
 module.exports = (socketArr, message) => {
