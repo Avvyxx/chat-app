@@ -1,11 +1,10 @@
 const crypto = require('node:crypto');
 
-const { magicWebSocketKey, updateClientLogs, broadcast } = require('../util');
+const { magicWebSocketKey, updateClientLogs, updateClientConnected } = require('../util');
 
-const socketReadable = require('./socket-readable')
-const socketClose = require('./socket-close')
+const socketReadable = require('./socket-readable');
 
-let sockets = [];
+let connectedSockets = [];
 
 module.exports = (req, socket) => {
 	console.log('Client requested upgrade.');
@@ -21,12 +20,18 @@ module.exports = (req, socket) => {
 		console.log('Connection established.');
 	});
 
-	sockets.push(socket);
+	connectedSockets.push(socket);
 
 	updateClientLogs(socket);
-	broadcast(sockets, JSON.stringify({ objective: 'update client connected', content: sockets.length }));
+	connectedSockets.forEach(updateClientConnected(connectedSockets.length));
 
 	// TODO: ping client to keep connection alive or respond to ping from client
-	socket.on('readable', socketReadable(socket, sockets));
-	socket.on('close', socketClose(sockets));
+	socket.on('readable', socketReadable(socket, connectedSockets));
+	socket.on('close', () => {
+		console.log('Connection closed.');
+
+		connectedSockets = connectedSockets.filter((socket) => socket.closed === false);
+
+		connectedSockets.forEach(updateClientConnected(connectedSockets.length));
+	});
 };
