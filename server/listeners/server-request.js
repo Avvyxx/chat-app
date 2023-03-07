@@ -3,14 +3,25 @@ const path = require('node:path');
 
 const { mainDir, mimeDict } = require('../util');
 
+const getEncoding = (extName) => {
+	if (extName === '.png' || extName === '.jpg') {
+		return null;
+	} else {
+		return 'utf-8';
+	}
+};
+
 module.exports = (req, res) => {
 	if (req.method === 'GET') {
 		const requestedFile = `${mainDir}/site${req.url === '/' ? '/index.html' : req.url}`;
 
 		if (fs.existsSync(requestedFile)) {
-			const fileContent = fs.readFileSync(requestedFile, { encoding: 'utf-8' });
+			const fileType = path.extname(requestedFile);
+
+			const fileContent = fs.readFileSync(requestedFile, { encoding: getEncoding(fileType) });
+
 			const headers = {
-				'Content-Type': mimeDict[path.extname(requestedFile)],
+				'Content-Type': mimeDict[fileType],
 			};
 
 			res.writeHead(200, headers);
