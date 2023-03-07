@@ -6,9 +6,10 @@ const sendFileMessageButton = document.getElementById('send-file-message');
 const initiateButton = document.getElementById('initiate');
 const terminateButton = document.getElementById('terminate');
 const clearLogButton = document.getElementById('clear-log');
-const connectionStatusDot = document.getElementById('connection-status');
+const connectionStatusImg = document.getElementById('connection-status');
 const messageLog = document.getElementById('message-log');
-const curConnectedCount = document.getElementById('cur-connected-count')
+const curConnectedCount = document.getElementById('cur-connected-count');
+const favicon = document.getElementById('favicon');
 
 webSocketWorker.onmessage = (e) => {
 	switch (e.data.objective) {
@@ -19,16 +20,18 @@ webSocketWorker.onmessage = (e) => {
 				textMessageInput.removeAttribute('disabled');
 				fileMessageInput.removeAttribute('disabled');
 				sendFileMessageButton.removeAttribute('disabled');
-				connectionStatusDot.style.backgroundColor = '#34cf39';
+				connectionStatusImg.src = 'img/green-dot.png';
+				favicon.href = 'img/green-dot.png';
 			} else {
 				initiateButton.removeAttribute('disabled');
 				terminateButton.disabled = true;
 				textMessageInput.disabled = true;
 				fileMessageInput.disabled = true;
 				sendFileMessageButton.disabled = true;
-				connectionStatusDot.style.backgroundColor = '#f6370e';
+				connectionStatusImg.src = 'img/red-dot.png';
+				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
-				curConnectedCount.innerHTML = 'N/A'
+				curConnectedCount.innerHTML = 'N/A';
 			}
 			break;
 		case 'update client logs':
@@ -57,7 +60,7 @@ webSocketWorker.onmessage = (e) => {
 			messageLog.scrollTo(0, messageLog.scrollHeight);
 			break;
 		case 'update client connected':
-			curConnectedCount.innerHTML = e.data.content.toString()
+			curConnectedCount.innerHTML = e.data.content.toString();
 			break;
 	}
 };
