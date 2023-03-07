@@ -21,7 +21,7 @@ module.exports = (socket, sockets) => {
 				let message = '';
 				let payloadVar = payload;
 				if (Boolean(MASK)) {
-					payloadVar = Uint8Array.from(data, (elt, i) => elt ^ maskingKey[i % 4]);
+					payloadVar = Uint8Array.from(payload, (elt, i) => elt ^ maskingKey[i % 4]);
 				}
 				payloadVar.forEach((charCode) => {
 					message += String.fromCharCode(charCode);
