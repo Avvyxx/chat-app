@@ -2,7 +2,7 @@ const fs = require('node:fs');
 
 const { mainDir } = require('../util');
 
-module.exports = (dataTypeIndicator, content) => {
+module.exports = (msgType, content) => {
 	const lifetimeLogPath = `${mainDir}/server/logs/lifetime-log.json`;
 	const sessionLogPath = `${mainDir}/server/logs/session-log.json`;
 
@@ -16,7 +16,7 @@ module.exports = (dataTypeIndicator, content) => {
 		...parsedLifetimeLog,
 		{
 			id: parsedLifetimeLog.length,
-			type: dataTypeIndicator === 1 ? 'text' : dataTypeIndicator === 2 ? 'file' : null,
+			type: msgType,
 			message: content,
 		},
 	];
@@ -25,7 +25,7 @@ module.exports = (dataTypeIndicator, content) => {
 		...parsedSessionLog,
 		{
 			id: parsedSessionLog.length,
-			type: dataTypeIndicator === 1 ? 'text' : dataTypeIndicator === 2 ? 'file' : null,
+			type: msgType,
 			message: content,
 		},
 	];
