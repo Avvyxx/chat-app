@@ -1,7 +1,9 @@
 const crypto = require('node:crypto');
 
-const { socketReadable, socketClose } = require('./index');
 const { magicWebSocketKey, updateClientLogs, broadcast } = require('../util');
+
+const socketReadable = require('./socket-readable')
+const socketClose = require('./socket-close')
 
 let sockets = [];
 
