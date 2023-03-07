@@ -10,7 +10,6 @@ module.exports = {
 	updateClientLogs: require('./functions/update-client-logs'),
 	fromDataFrame: require('./functions/from-data-frame'),
 	toDataFrame: require('./functions/to-data-frame'),
-	decodePayload: require('./functions/decode-payload'),
 	updateClientConnected: require('./functions/update-client-connected'),
 	broadcast: require('./functions/broadcast'),
 };

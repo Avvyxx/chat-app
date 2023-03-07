@@ -1,5 +1,5 @@
 const { logMessage } = require('../commands');
-const { fromDataFrame, toDataFrame, decodePayload, updateClientLogs, opcodeDict } = require('../util');
+const { fromDataFrame, toDataFrame, updateClientLogs, opcodeDict } = require('../util');
 
 // TODO: client rate limiting
 
@@ -18,7 +18,14 @@ module.exports = (socket, sockets) => {
 			if (payload.length === payloadLength) {
 				temp = [];
 
-				const message = decodePayload(Boolean(MASK), maskingKey, payload);
+				let message = '';
+				let payloadVar = payload;
+				if (Boolean(MASK)) {
+					payloadVar = Uint8Array.from(data, (elt, i) => elt ^ maskingKey[i % 4]);
+				}
+				payloadVar.forEach((charCode) => {
+					message += String.fromCharCode(charCode);
+				});
 
 				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING } = opcodeDict;
 				switch (opcode) {
