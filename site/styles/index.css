@@ -45,6 +45,14 @@ header {
     flex-direction: column;
 }
 
+.user-info{
+    display: flex
+}
+
+.user-info div{
+    flex-grow: 1;
+}
+
 .message-log-viewbox {
     flex-grow: 1;
     position: relative;
