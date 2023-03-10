@@ -53,6 +53,18 @@ header {
     flex-grow: 1;
 }
 
+.info-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.set-values{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .message-log-viewbox {
     flex-grow: 1;
     position: relative;
