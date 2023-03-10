@@ -38,6 +38,8 @@ module.exports = (socket, sockets) => {
 								switch (msgObj.content) {
 									case 'clear session log':
 										clearLog();
+
+										sockets.forEach(updateClientLogs)
 										break;
 								}
 								break;

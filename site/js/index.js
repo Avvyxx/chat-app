@@ -191,6 +191,6 @@ clearLogButton.onclick = () => {
 	webSocketWorker.postMessage({
 		webSocketWorkerObjective: 'communicate to server',
 		objective: 'run command',
-		content: 'clear message log',
+		content: 'clear session log',
 	});
 };
