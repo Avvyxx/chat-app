@@ -29,13 +29,18 @@
                     <legend>Commands:</legend>
                     <button id="clear-log" type="button">Clear Log</button>
                 </fieldset>
-                <fieldset>
+                <fieldset class="user-info">
                     <legend>User:</legend>
-                    <label for="username">
-                        Username:
-                        <input type="text" id="username" name="username" disabled=""/>
-                    </label>
-                    <button id="set-username" type="button" disabled="">Set</button>
+                    <div>
+                        <label for="username">
+                            Username:
+                            <input type="text" id="username" name="username" disabled=""/>
+                        </label>
+                        <button id="set-username" type="button" disabled="">Set</button>
+                    </div>
+                    <div>
+                        <p>Username: <span id="cur-username">N/A</span></p>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Message:</legend>
