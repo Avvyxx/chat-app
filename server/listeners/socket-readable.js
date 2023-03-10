@@ -18,11 +18,12 @@ module.exports = (socket, sockets) => {
 			if (payload.length === payloadLength) {
 				temp = [];
 
-				let message = '';
 				let payloadVar = payload;
 				if (Boolean(MASK)) {
 					payloadVar = Uint8Array.from(payload, (elt, i) => elt ^ maskingKey[i % 4]);
 				}
+
+				let message = '';
 				payloadVar.forEach((charCode) => {
 					message += String.fromCharCode(charCode);
 				});
