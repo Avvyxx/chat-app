@@ -10,6 +10,8 @@ const connectionStatusImg = document.getElementById('connection-status');
 const messageLog = document.getElementById('message-log');
 const curConnectedCount = document.getElementById('cur-connected-count');
 const favicon = document.getElementById('favicon');
+const usernameInput = document.getElementById('username');
+const usernameSetButton = document.getElementById('set-username');
 
 webSocketWorker.onmessage = (e) => {
 	switch (e.data.objective) {
