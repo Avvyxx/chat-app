@@ -1,4 +1,4 @@
-const { logMessage, interpretMessage } = require('../commands');
+const { logMessage, clearLog } = require('../commands');
 const { fromDataFrame, toDataFrame, updateClientLogs, opcodeDict } = require('../util');
 
 // TODO: client rate limiting
