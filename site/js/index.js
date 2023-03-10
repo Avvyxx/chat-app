@@ -21,27 +21,35 @@ const curSetMessageColor = document.getElementById('cur-message-color');
 	ele.value = '';
 });
 
+// prettier-ignore
+const eleArr = [
+    terminateButton,
+    textMessageInput,
+    fileMessageInput,
+    sendFileMessageButton,
+    usernameInput,
+    usernameSetButton,
+    messageColorInput,
+    messageColorSetButton
+];
+
 webSocketWorker.onmessage = (e) => {
 	switch (e.data.objective) {
 		case 'update connection state':
 			if (e.data.content) {
 				initiateButton.disabled = true;
-				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton, messageColorInput, messageColorSetButton].forEach(
-					(ele) => {
-						ele.removeAttribute('disabled');
-					}
-				);
+				eleArr.forEach((ele) => {
+					ele.removeAttribute('disabled');
+				});
 				curSetUsername.innerHTML = 'anon';
 				curSetMessageColor.innerHTML = '#000000';
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
 				initiateButton.removeAttribute('disabled');
-				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton, messageColorInput, messageColorSetButton].forEach(
-					(ele) => {
-						ele.disabled = true;
-					}
-				);
+				eleArr.forEach((ele) => {
+					ele.disabled = true;
+				});
 				connectionStatusImg.src = 'img/red-dot.png';
 				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
