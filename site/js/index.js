@@ -22,6 +22,8 @@ webSocketWorker.onmessage = (e) => {
 				textMessageInput.removeAttribute('disabled');
 				fileMessageInput.removeAttribute('disabled');
 				sendFileMessageButton.removeAttribute('disabled');
+				usernameInput.removeAttribute('disabled');
+				usernameSetButton.removeAttribute('disabled');
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
@@ -30,6 +32,8 @@ webSocketWorker.onmessage = (e) => {
 				textMessageInput.disabled = true;
 				fileMessageInput.disabled = true;
 				sendFileMessageButton.disabled = true;
+				usernameInput.disabled = true;
+				usernameSetButton.disabled = true;
 				connectionStatusImg.src = 'img/red-dot.png';
 				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
