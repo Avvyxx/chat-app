@@ -12,6 +12,11 @@ const curConnectedCount = document.getElementById('cur-connected-count');
 const favicon = document.getElementById('favicon');
 const usernameInput = document.getElementById('username');
 const usernameSetButton = document.getElementById('set-username');
+const curSetUsername = document.getElementById('cur-username');
+
+[...document.getElementsByTagName('input')].forEach((ele) => {
+	ele.value = '';
+});
 
 webSocketWorker.onmessage = (e) => {
 	switch (e.data.objective) {
@@ -21,6 +26,7 @@ webSocketWorker.onmessage = (e) => {
 				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton].forEach((ele) => {
 					ele.removeAttribute('disabled');
 				});
+				curSetUsername.innerHTML = 'anon';
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
@@ -42,7 +48,7 @@ webSocketWorker.onmessage = (e) => {
 			messageArr.forEach(({ username, type, message }) => {
 				const messageEle = document.createElement('div');
 				messageEle.style.display = 'flex';
-				messageEle.style.gap = '10px'
+				messageEle.style.gap = '10px';
 
 				const usernameEle = document.createElement('p');
 				usernameEle.appendChild(document.createTextNode(username + ':'));
@@ -86,6 +92,7 @@ usernameInput.oninput = (e) => {
 };
 
 usernameSetButton.onclick = () => {
+	curSetUsername.innerHTML = curUsername;
 	webSocketWorker.postMessage({
 		webSocketWorkerObjective: 'communicate to server',
 		objective: 'update username',
