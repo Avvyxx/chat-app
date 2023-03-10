@@ -31,15 +31,26 @@ module.exports = (socket, sockets) => {
 				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING } = opcodeDict;
 				switch (opcode) {
 					case TEXT_FRAME:
-						interpretMessage('text', message);
+						const msgObj = JSON.parse(message);
 
-						sockets.forEach(updateClientLogs);
+						switch (msgObj.objective) {
+							case 'run command':
+								switch (msgObj.content) {
+									case 'clear session log':
+										clearLog();
+										break;
+								}
+								break;
+							case 'log message':
+								logMessage(msgObj.type, msgObj.content);
+
+								sockets.forEach(updateClientLogs);
+								break;
+						}
 						break;
 					case BINARY_FRAME:
-						const base64Encoding = Buffer.from(message, 'binary').toString('base64');
-						logMessage('file', base64Encoding);
-
-						sockets.forEach(updateClientLogs);
+						console.log(message);
+						throw new Error('Frame is not supported.');
 						break;
 					case CONNECTION_CLOSE:
 						socket.destroy();
