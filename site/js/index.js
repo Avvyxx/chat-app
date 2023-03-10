@@ -15,6 +15,7 @@ const usernameSetButton = document.getElementById('set-username');
 const curSetUsername = document.getElementById('cur-username');
 const messageColorInput = document.getElementById('message-color');
 const messageColorSetButton = document.getElementById('set-message-color');
+const curSetMessageColor = document.getElementById('cur-message-color');
 
 [...document.getElementsByTagName('input')].forEach((ele) => {
 	ele.value = '';
@@ -31,6 +32,7 @@ webSocketWorker.onmessage = (e) => {
 					}
 				);
 				curSetUsername.innerHTML = 'anon';
+				curSetMessageColor.innerHTML = '#000000';
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
@@ -43,7 +45,9 @@ webSocketWorker.onmessage = (e) => {
 				connectionStatusImg.src = 'img/red-dot.png';
 				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
+				curSetUsername.innerHTML = 'N/A';
 				curConnectedCount.innerHTML = 'N/A';
+				curSetMessageColor.innerHTML = 'N/A';
 			}
 			break;
 		case 'update client logs':
@@ -51,7 +55,7 @@ webSocketWorker.onmessage = (e) => {
 
 			const messageArr = JSON.parse(e.data.content);
 
-			messageArr.forEach(({ username, type, message }) => {
+			messageArr.forEach(({ username, type, color, message }) => {
 				const messageEle = document.createElement('div');
 				messageEle.style.display = 'flex';
 				messageEle.style.gap = '10px';
@@ -65,6 +69,7 @@ webSocketWorker.onmessage = (e) => {
 					messageContent = document.createElement('p');
 					const textNode = document.createTextNode(message);
 					messageContent.appendChild(textNode);
+					messageContent.style.color = color;
 
 					messageContent.classList.add('text_message');
 					messageLog.appendChild(messageContent);
@@ -98,11 +103,26 @@ usernameInput.oninput = (e) => {
 };
 
 usernameSetButton.onclick = () => {
-	curSetUsername.innerHTML = curUsername;
+	curSetUsername.innerHTML = curUsername.length === 0 ? 'anon' : curUsername;
 	webSocketWorker.postMessage({
 		webSocketWorkerObjective: 'communicate to server',
 		objective: 'update username',
-		content: curUsername,
+		content: curUsername.length === 0 ? 'anon' : curUsername,
+	});
+};
+
+let curColor = '';
+
+messageColorInput.onchange = (e) => {
+	curColor = e.target.value;
+};
+
+messageColorSetButton.onclick = () => {
+	curSetMessageColor.innerHTML = curColor;
+	webSocketWorker.postMessage({
+		webSocketWorkerObjective: 'communicate to server',
+		objective: 'update message color',
+		content: curColor,
 	});
 };
 
