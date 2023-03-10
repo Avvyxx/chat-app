@@ -22,11 +22,7 @@ onmessage = (e) => {
 			};
 
 			webSocket.onmessage = (e) => {
-				const { objective, content } = JSON.parse(e.data);
-				postMessage({
-					objective,
-					content,
-				});
+				postMessage(JSON.parse(e.data));
 			};
 			break;
 		case 'terminate websocket':
