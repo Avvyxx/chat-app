@@ -39,25 +39,35 @@ webSocketWorker.onmessage = (e) => {
 
 			const messageArr = JSON.parse(e.data.content);
 
-			messageArr.forEach(({ type, message }) => {
-				let eleToAppend;
+			messageArr.forEach(({ username, type, message }) => {
+				const messageEle = document.createElement('div');
+				messageEle.style.display = 'flex';
+				messageEle.style.gap = '10px'
+
+				const usernameEle = document.createElement('p');
+				usernameEle.appendChild(document.createTextNode(username + ':'));
+
+				let messageContent;
+
 				if (type === 'text') {
-					eleToAppend = document.createElement('p');
+					messageContent = document.createElement('p');
 					const textNode = document.createTextNode(message);
+					messageContent.appendChild(textNode);
 
-					eleToAppend.appendChild(textNode);
-					eleToAppend.classList.add('text_message');
-
-					messageLog.appendChild(eleToAppend);
+					messageContent.classList.add('text_message');
+					messageLog.appendChild(messageContent);
 				} else if (type === 'file') {
-					eleToAppend = document.createElement('img');
+					messageContent = document.createElement('img');
 
-					eleToAppend.classList.add('image_message');
+					messageContent.classList.add('image_message');
 
-					eleToAppend.src = 'data:image/png;charset=utf-8;base64,' + message;
+					messageContent.src = 'data:image/png;charset=utf-8;base64,' + message;
 				}
 
-				messageLog.append(eleToAppend);
+				messageEle.appendChild(usernameEle);
+				messageEle.appendChild(messageContent);
+
+				messageLog.append(messageEle);
 			});
 
 			messageLog.scrollTo(0, messageLog.scrollHeight);
