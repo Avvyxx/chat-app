@@ -44,8 +44,11 @@ module.exports = (socket, sockets) => {
 							case 'update username':
 								socket.username = msgObj.content;
 								break;
+							case 'update message color':
+								socket.messageColor = msgObj.content;
+								break;
 							case 'log message':
-								logMessage(socket.username.length === 0 ? 'anon' : socket.username, msgObj.type, msgObj.content);
+								logMessage(socket.username ? socket.username: 'anon', msgObj.type, socket.messageColor, msgObj.content);
 
 								sockets.forEach(updateClientLogs);
 								break;
