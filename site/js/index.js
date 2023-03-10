@@ -16,6 +16,7 @@ const curSetUsername = document.getElementById('cur-username');
 const messageColorInput = document.getElementById('message-color');
 const messageColorSetButton = document.getElementById('set-message-color');
 const curSetMessageColor = document.getElementById('cur-message-color');
+const resetValuesButton = document.getElementById('reset-user-values');
 
 [...document.getElementsByTagName('input')].forEach((ele) => {
 	ele.value = '';
@@ -64,6 +65,7 @@ webSocketWorker.onmessage = (e) => {
 			const messageArr = JSON.parse(e.data.content);
 
 			messageArr.forEach(({ username, type, color, message }) => {
+				// TODO: styles should be set in css
 				const messageEle = document.createElement('div');
 				messageEle.style.display = 'flex';
 				messageEle.style.gap = '10px';
@@ -132,6 +134,23 @@ messageColorSetButton.onclick = () => {
 		webSocketWorkerObjective: 'communicate to server',
 		objective: 'update message color',
 		content: curColor.length === 0 ? '#000000' : curColor,
+	});
+};
+
+resetValuesButton.onclick = () => {
+	curSetUsername.innerHTML = 'anon';
+	curSetMessageColor.innerHTML = '#000000';
+	usernameInput.value = '';
+	messageColorInput.value = '#000000';
+	webSocketWorker.postMessage({
+		webSocketWorkerObjective: 'communicate to server',
+		objective: 'update username',
+		content: 'anon',
+	});
+	webSocketWorker.postMessage({
+		webSocketWorkerObjective: 'communicate to server',
+		objective: 'update message color',
+		content: '#000000',
 	});
 };
 

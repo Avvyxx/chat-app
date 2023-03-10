@@ -29,9 +29,10 @@
                     <legend>Commands:</legend>
                     <button id="clear-log" type="button">Clear Log</button>
                 </fieldset>
-                <fieldset class="user-info">
+                <fieldset>
                     <legend>User:</legend>
-                    <div class="info-inputs">
+                    <div class="user-info">
+                        <div class="info-inputs">
                         <div>
                             <label for="username">
                                 Username:
@@ -47,10 +48,12 @@
                             <button id="set-message-color" type="button" disabled="">Set</button>
                         </div>
                     </div>
-                    <div class="set-values">
+                        <div class="set-values">
                         <p>Username: <span id="cur-username">N/A</span></p>
                         <p>Message Color: <span id="cur-message-color">N/A</span></p>
                     </div>
+                    </div>
+                    <button id="reset-user-values">Reset</button>
                 </fieldset>
                 <fieldset>
                     <legend>Message:</legend>

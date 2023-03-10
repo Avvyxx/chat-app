@@ -93,3 +93,7 @@ header {
     max-width: 400px;
     border: 1px solid black
 }
+
+#reset-user-values{
+    margin-top: 20px;
+}
