@@ -32,5 +32,5 @@ module.exports = (msgType, content) => {
 	];
 
 	fs.writeFileSync(lifetimeLogPath, JSON.stringify(updatedLifetimeLog), { encoding: 'utf-8' });
-	fs.writeFileSync(sessionLogPath, JSON.stringify(updatedSessionLog), { encoding: 'utf8' });
+	fs.writeFileSync(sessionLogPath, JSON.stringify(updatedSessionLog), { encoding: 'utf-8' });
 };
