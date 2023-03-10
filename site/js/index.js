@@ -13,6 +13,8 @@ const favicon = document.getElementById('favicon');
 const usernameInput = document.getElementById('username');
 const usernameSetButton = document.getElementById('set-username');
 const curSetUsername = document.getElementById('cur-username');
+const messageColorInput = document.getElementById('message-color');
+const setMessageColorButton = document.getElementById('set-message-color');
 
 [...document.getElementsByTagName('input')].forEach((ele) => {
 	ele.value = '';
@@ -23,17 +25,21 @@ webSocketWorker.onmessage = (e) => {
 		case 'update connection state':
 			if (e.data.content) {
 				initiateButton.disabled = true;
-				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton].forEach((ele) => {
-					ele.removeAttribute('disabled');
-				});
+				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton, messageColorInput, setMessageColorButton].forEach(
+					(ele) => {
+						ele.removeAttribute('disabled');
+					}
+				);
 				curSetUsername.innerHTML = 'anon';
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
 				initiateButton.removeAttribute('disabled');
-				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton].forEach((ele) => {
-					ele.disabled = true;
-				});
+				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton, messageColorInput, setMessageColorButton].forEach(
+					(ele) => {
+						ele.disabled = true;
+					}
+				);
 				connectionStatusImg.src = 'img/red-dot.png';
 				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
