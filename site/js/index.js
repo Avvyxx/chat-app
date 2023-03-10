@@ -75,6 +75,7 @@ textMessageInput.oninput = (e) => {
 textMessageInput.onkeydown = (e) => {
 	if (e.key.toLowerCase() === 'enter') {
 		webSocketWorker.postMessage({
+			webSocketWorkerObjective: 'communicate to server',
 			objective: 'log message',
 			type: 'text',
 			content: textMessageInput.value,
@@ -88,6 +89,7 @@ sendFileMessageButton.onclick = () => {
 	const fileToSend = new FileReader();
 	fileToSend.onloadend = (e) => {
 		webSocketWorker.postMessage({
+			webSocketWorkerObjective: 'communicate to server',
 			objective: 'log message',
 			type: 'file',
 			content: e.target.result,
@@ -98,18 +100,19 @@ sendFileMessageButton.onclick = () => {
 
 initiateButton.onclick = () => {
 	webSocketWorker.postMessage({
-		objective: 'initiate websocket',
+		webSocketWorkerObjective: 'initiate websocket',
 	});
 };
 
 terminateButton.onclick = () => {
 	webSocketWorker.postMessage({
-		objective: 'terminate websocket',
+		webSocketWorkerObjective: 'terminate websocket',
 	});
 };
 
 clearLogButton.onclick = () => {
 	webSocketWorker.postMessage({
+		webSocketWorkerObjective: 'communicate to server',
 		objective: 'run command',
 		content: 'clear message log',
 	});

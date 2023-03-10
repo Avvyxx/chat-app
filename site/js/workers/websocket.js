@@ -1,7 +1,7 @@
 let webSocket;
 
 onmessage = (e) => {
-	switch (e.data.objective) {
+	switch (e.data.webSocketWorkerObjective) {
 		case 'initiate websocket':
 			webSocket = new WebSocket('ws://localhost:3000');
 
@@ -32,15 +32,10 @@ onmessage = (e) => {
 				throw new Error("WebSocket hasn't been initiated.");
 			}
 			break;
-		case 'run command':
-			switch (e.data.content) {
-				case 'clear message log':
-					webSocket.send('clear_log()');
-					break;
-			}
-			break;
-		case 'log message':
-			webSocket.send(e.data.content);
+		case 'communicate to server':
+			delete e.data.webSocketWorkerObjective;
+
+			webSocket.send(JSON.stringify(e.data));
 			break;
 	}
 };
