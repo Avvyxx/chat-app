@@ -3,7 +3,7 @@ const path = require('node:path');
 
 const { mainDir } = require('../util');
 
-module.exports = (username = 'anon', type, message) => {
+module.exports = (username = 'anon', type, color, message) => {
 	const lifetimeLogPath = path.join(mainDir, 'server', 'logs', 'lifetime-log.json');
 	const sessionLogPath = path.join(mainDir, 'server', 'logs', 'session-log.json');
 
@@ -19,6 +19,7 @@ module.exports = (username = 'anon', type, message) => {
 			id: parsedLifetimeLog.length,
 			username,
 			type,
+			color,
 			message,
 		},
 	];
@@ -29,6 +30,7 @@ module.exports = (username = 'anon', type, message) => {
 			id: parsedSessionLog.length,
 			username,
 			type,
+			color,
 			message,
 		},
 	];
