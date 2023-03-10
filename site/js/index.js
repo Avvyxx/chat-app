@@ -71,6 +71,21 @@ webSocketWorker.onmessage = (e) => {
 	}
 };
 
+let curUsername = '';
+
+usernameInput.oninput = (e) => {
+	curUsername = e.target.value;
+	usernameInput.value = curUsername;
+};
+
+usernameSetButton.onclick = () => {
+	webSocketWorker.postMessage({
+		webSocketWorkerObjective: 'communicate to server',
+		objective: 'update username',
+		content: curUsername,
+	});
+};
+
 let curMessage = '';
 
 textMessageInput.oninput = (e) => {
