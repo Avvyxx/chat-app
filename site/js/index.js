@@ -118,11 +118,11 @@ messageColorInput.onchange = (e) => {
 };
 
 messageColorSetButton.onclick = () => {
-	curSetMessageColor.innerHTML = curColor;
+	curSetMessageColor.innerHTML = curColor.length === 0 ? '#000000' : curColor;
 	webSocketWorker.postMessage({
 		webSocketWorkerObjective: 'communicate to server',
 		objective: 'update message color',
-		content: curColor,
+		content: curColor.length === 0 ? '#000000' : curColor,
 	});
 };
 
