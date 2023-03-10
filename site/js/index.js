@@ -18,22 +18,16 @@ webSocketWorker.onmessage = (e) => {
 		case 'update connection state':
 			if (e.data.content) {
 				initiateButton.disabled = true;
-				terminateButton.removeAttribute('disabled');
-				textMessageInput.removeAttribute('disabled');
-				fileMessageInput.removeAttribute('disabled');
-				sendFileMessageButton.removeAttribute('disabled');
-				usernameInput.removeAttribute('disabled');
-				usernameSetButton.removeAttribute('disabled');
+				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton].forEach((ele) => {
+					ele.removeAttribute('disabled');
+				});
 				connectionStatusImg.src = 'img/green-dot.png';
 				favicon.href = 'img/green-dot.png';
 			} else {
 				initiateButton.removeAttribute('disabled');
-				terminateButton.disabled = true;
-				textMessageInput.disabled = true;
-				fileMessageInput.disabled = true;
-				sendFileMessageButton.disabled = true;
-				usernameInput.disabled = true;
-				usernameSetButton.disabled = true;
+				[terminateButton, textMessageInput, fileMessageInput, sendFileMessageButton, usernameInput, usernameSetButton].forEach((ele) => {
+					ele.disabled = true;
+				});
 				connectionStatusImg.src = 'img/red-dot.png';
 				favicon.href = 'img/red-dot.png';
 				messageLog.innerHTML = '';
