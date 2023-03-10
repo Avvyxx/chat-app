@@ -72,11 +72,12 @@ webSocketWorker.onmessage = (e) => {
 				usernameEle.appendChild(document.createTextNode(username + ':'));
 
 				let messageContent;
-
 				if (type === 'text') {
 					messageContent = document.createElement('p');
 					const textNode = document.createTextNode(message);
+
 					messageContent.appendChild(textNode);
+
 					messageContent.style.color = color;
 
 					messageContent.classList.add('text_message');
