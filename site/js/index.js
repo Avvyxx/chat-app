@@ -88,11 +88,19 @@ textMessageInput.onkeydown = (e) => {
 sendFileMessageButton.onclick = () => {
 	const fileToSend = new FileReader();
 	fileToSend.onloadend = (e) => {
+		let binaryString = '';
+		if (e.target.result instanceof ArrayBuffer) {
+			new Uint8Array(e.target.result).map((charCode) => {
+				binaryString += String.fromCharCode(charCode);
+			});
+		} else {
+			binaryString = e.target.result;
+		}
 		webSocketWorker.postMessage({
 			webSocketWorkerObjective: 'communicate to server',
 			objective: 'log message',
 			type: 'file',
-			content: e.target.result,
+			content: btoa(binaryString),
 		});
 	};
 	fileToSend.readAsArrayBuffer(fileMessageInput.files[0]);
