@@ -36,7 +36,9 @@ webSocketWorker.onmessage = (e) => {
 			break;
 		case 'update client logs':
 			messageLog.innerHTML = '';
+
 			const messageArr = JSON.parse(e.data.content);
+
 			messageArr.forEach(({ type, message }) => {
 				let eleToAppend;
 				if (type === 'text') {
@@ -57,6 +59,7 @@ webSocketWorker.onmessage = (e) => {
 
 				messageLog.append(eleToAppend);
 			});
+
 			messageLog.scrollTo(0, messageLog.scrollHeight);
 			break;
 		case 'update client connected':
