@@ -34,4 +34,16 @@ module.exports = (req, socket) => {
 
 		connectedSockets.forEach(updateClientConnected(connectedSockets.length));
 	});
+	socket.on('connect', () => {
+		console.log('connect event')
+	})
+	socket.on('error', () => {
+		console.log('error event')
+	})
+	socket.on('drain', () => {
+		console.log('drain event')
+	})
+	socket.on('ready', () => {
+		console.log('ready event')
+	})
 };
