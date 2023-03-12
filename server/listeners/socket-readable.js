@@ -64,8 +64,9 @@ module.exports = (socket, sockets) => {
 						socket.destroy();
 						break;
 					case PING:
-						const pongFrame = toDataFrame('1', '0', '0', '0', '1010', '0', 'pong frame');
-						socket.write(pongFrame);
+						// const pongFrame = toDataFrame('1', '0', '0', '0', '1010', '0', 'pong frame');
+						// socket.write(pongFrame);
+						console.log('ping frame received.')
 						break;
 					default:
 						break;
