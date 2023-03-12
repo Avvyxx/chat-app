@@ -14,7 +14,8 @@ onmessage = (e) => {
 			};
 
 			webSocket.onclose = (e) => {
-				console.log('WebSocket connection to chat server terminated.', e);
+				debugger;
+				console.log('WebSocket connection to chat server terminated.');
 				postMessage({
 					objective: 'update connection state',
 					content: false,
@@ -26,8 +27,8 @@ onmessage = (e) => {
 			};
 
 			webSocket.onerror = () => {
-				console.log('error')
-			}
+				console.log('error');
+			};
 			break;
 		case 'terminate websocket':
 			if (webSocket instanceof WebSocket) {
