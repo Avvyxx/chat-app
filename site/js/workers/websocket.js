@@ -24,6 +24,10 @@ onmessage = (e) => {
 			webSocket.onmessage = (e) => {
 				postMessage(JSON.parse(e.data));
 			};
+
+			webSocket.onerror = () => {
+				console.log('error')
+			}
 			break;
 		case 'terminate websocket':
 			if (webSocket instanceof WebSocket) {
