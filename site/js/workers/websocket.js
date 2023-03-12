@@ -13,6 +13,10 @@ onmessage = (e) => {
 				});
 			};
 
+			webSocket.onerror = () => {
+				console.log('error');
+			};
+
 			webSocket.onclose = (e) => {
 				debugger;
 				console.log('WebSocket connection to chat server terminated.');
@@ -24,10 +28,6 @@ onmessage = (e) => {
 
 			webSocket.onmessage = (e) => {
 				postMessage(JSON.parse(e.data));
-			};
-
-			webSocket.onerror = () => {
-				console.log('error');
 			};
 			break;
 		case 'terminate websocket':
