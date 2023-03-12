@@ -28,7 +28,7 @@ module.exports = (socket, sockets) => {
 					message += String.fromCharCode(charCode);
 				});
 
-				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING } = opcodeDict;
+				const { TEXT_FRAME, BINARY_FRAME, CONNECTION_CLOSE, PING, PONG } = opcodeDict;
 				switch (opcode) {
 					case TEXT_FRAME:
 						const msgObj = JSON.parse(message);
@@ -39,7 +39,7 @@ module.exports = (socket, sockets) => {
 									case 'clear session log':
 										clearLog();
 
-										sockets.forEach(updateClientLogs)
+										sockets.forEach(updateClientLogs);
 										break;
 								}
 								break;
@@ -50,7 +50,7 @@ module.exports = (socket, sockets) => {
 								socket.messageColor = msgObj.content;
 								break;
 							case 'log message':
-								logMessage(socket.username ? socket.username: 'anon', msgObj.type, socket.messageColor, msgObj.content);
+								logMessage(socket.username ? socket.username : 'anon', msgObj.type, socket.messageColor, msgObj.content);
 
 								sockets.forEach(updateClientLogs);
 								break;
@@ -66,7 +66,10 @@ module.exports = (socket, sockets) => {
 					case PING:
 						// const pongFrame = toDataFrame('1', '0', '0', '0', '1010', '0', 'pong frame');
 						// socket.write(pongFrame);
-						console.log('ping frame received.')
+						console.log('ping frame received.');
+						break;
+					case PONG:
+						console.log('pong frame received.');
 						break;
 					default:
 						break;
