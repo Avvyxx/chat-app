@@ -14,6 +14,7 @@ const getEncoding = (extName) => {
 module.exports = (req, res) => {
 	if (req.method === 'GET') {
 		const requestedFile = `${mainDir}/site${req.url === '/' ? '/index.html' : req.url}`;
+		console.log(requestedFile)
 
 		if (fs.existsSync(requestedFile)) {
 			const fileType = path.extname(requestedFile);
